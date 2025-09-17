@@ -1,10 +1,12 @@
-# tests/test_playlist.py
+import sys
 import os
-import tempfile
-# tests/test_playlist.py
-import unittest
-from src.song import Song
-from src.playlist import Playlist
+import unittest  # noqa: E402
+
+sys.path.insert(0, os.path.abspath(
+    os.path.join(os.path.dirname(__file__), "..")))
+
+from src.playlist import Playlist  # noqa: E402
+from src.song import Song  # noqa: E402
 
 
 class TestPlaylist(unittest.TestCase):
@@ -43,4 +45,7 @@ def test_reorder_song():
     p.add_song(s3)
     p.reorder_song(0, 2)
     assert p.songs[2] == s1
-    #
+
+
+if __name__ == "__main__":
+    unittest.main()
