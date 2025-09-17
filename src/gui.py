@@ -6,7 +6,7 @@ Simple Tkinter GUI that demonstrates the MVP requirements:
 - reorder songs (up/down)
 - export playlist to M3U
 
-This file intentionally keeps the UI minimal so the MVP is easy to test.
+This file intentionally keeps the UI basic so the MVP is easy to test.
 """
 
 import tkinter as tk
