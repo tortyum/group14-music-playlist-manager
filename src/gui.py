@@ -1,4 +1,5 @@
-"""src/gui.py
+"""
+src/gui.py
 Simple Tkinter GUI that demonstrates the MVP requirements:
 - a mock local library (list of Song objects)
 - ability to add songs to a playlist
@@ -10,9 +11,10 @@ This file intentionally keeps the UI minimal so the MVP is easy to test.
 
 import tkinter as tk
 from tkinter import messagebox, filedialog
-from src.song import Song
-from src.playlist import Playlist
+from song import Song, demo_songs, afrobeats_songs
+from playlist import Playlist
 import os
+
 
 class PlaylistGUI:
     def __init__(self, root):
@@ -22,13 +24,13 @@ class PlaylistGUI:
 
         self.playlist = Playlist("My Playlist")
 
-        # Mock library data - in a real app you'd scan directories or load metadata
+        # Present mock songs + demo + Afrobeats
         self.library = [
-            Song("Shape of You", "Ed Sheeran", "Divide", "3:53"),
-            Song("Blinding Lights", "The Weeknd", "After Hours", "3:20"),
-            Song("Levitating", "Dua Lipa", "Future Nostalgia", "3:23"),
-            Song("Smells Like Teen Spirit", "Nirvana", "Nevermind", "5:01"),
-        ]
+            Song("Shape of You", "Ed Sheeran", 233),
+            Song("Blinding Lights", "The Weeknd", 200),
+            Song("Levitating", "Dua Lipa", 203),
+            Song("Smells Like Teen Spirit", "Nirvana", 301),
+        ] + demo_songs + afrobeats_songs   # merged all
 
         # Build UI frames
         self.left_frame = tk.Frame(root, padx=10, pady=10)
@@ -37,7 +39,8 @@ class PlaylistGUI:
         self.right_frame.pack(side=tk.RIGHT, fill=tk.BOTH, expand=True)
 
         # Library (left)
-        tk.Label(self.left_frame, text="Library", font=(None, 12, 'bold')).pack(anchor='w')
+        tk.Label(self.left_frame, text="Library",
+                 font=(None, 12, 'bold')).pack(anchor='w')
         self.search_var = tk.StringVar()
         search_entry = tk.Entry(self.left_frame, textvariable=self.search_var)
         search_entry.pack(fill=tk.X)
@@ -47,7 +50,8 @@ class PlaylistGUI:
         self.library_listbox.pack(fill=tk.BOTH, expand=True)
 
         # Playlist (right)
-        tk.Label(self.right_frame, text="Playlist", font=(None, 12, 'bold')).pack(anchor='w')
+        tk.Label(self.right_frame, text="Playlist",
+                 font=(None, 12, 'bold')).pack(anchor='w')
         self.playlist_listbox = tk.Listbox(self.right_frame, height=15)
         self.playlist_listbox.pack(fill=tk.BOTH, expand=True)
 
@@ -55,34 +59,38 @@ class PlaylistGUI:
         btn_frame = tk.Frame(root, pady=6)
         btn_frame.pack(side=tk.BOTTOM)
 
-        tk.Button(btn_frame, text="Add to Playlist", command=self.add_selected).pack(side=tk.LEFT, padx=4)
-        tk.Button(btn_frame, text="Remove Selected", command=self.remove_selected).pack(side=tk.LEFT, padx=4)
-        tk.Button(btn_frame, text="Move Up", command=lambda: self.move_selected(-1)).pack(side=tk.LEFT, padx=4)
-        tk.Button(btn_frame, text="Move Down", command=lambda: self.move_selected(1)).pack(side=tk.LEFT, padx=4)
-        tk.Button(btn_frame, text="Export M3U", command=self.export_playlist).pack(side=tk.LEFT, padx=4)
+        tk.Button(btn_frame, text="Add to Playlist",
+                  command=self.add_selected).pack(side=tk.LEFT, padx=4)
+        tk.Button(btn_frame, text="Remove Selected",
+                  command=self.remove_selected).pack(side=tk.LEFT, padx=4)
+        tk.Button(btn_frame, text="Move Up",
+                  command=lambda: self.move_selected(-1)).pack(side=tk.LEFT, padx=4)
+        tk.Button(btn_frame, text="Move Down",
+                  command=lambda: self.move_selected(1)).pack(side=tk.LEFT, padx=4)
+        tk.Button(btn_frame, text="Export M3U",
+                  command=self.export_playlist).pack(side=tk.LEFT, padx=4)
 
         self.update_library_list()
 
     def update_library_list(self):
-        """Populate the library listbox by running a regex search against mock library.""\            "
+        # update the library listbox by running a regex search against mock library.
         q = self.search_var.get().strip()
-        # if query empty show all
         if not q:
             items = self.library
         else:
-            # use Playlist.search logic for consistency (but on library)
             import re
             try:
                 pattern = re.compile(q, re.IGNORECASE)
-                items = [s for s in self.library if pattern.search(s.title) or pattern.search(s.artist)]
+                items = [s for s in self.library if pattern.search(
+                    s.title) or pattern.search(s.artist)]
             except re.error:
-                items = [s for s in self.library if q.lower() in s.title.lower() or q.lower() in s.artist.lower()]
+                items = [s for s in self.library if q.lower(
+                ) in s.title.lower() or q.lower() in s.artist.lower()]
 
         self.library_listbox.delete(0, tk.END)
         for s in items:
             self.library_listbox.insert(tk.END, str(s))
-        # keep a mapping for selection
-        self._displayed_library = items
+        self._displayed_library = items  # mapping for selection
 
     def add_selected(self):
         sel = self.library_listbox.curselection()
@@ -118,15 +126,18 @@ class PlaylistGUI:
             self.playlist_listbox.insert(tk.END, str(s))
 
     def export_playlist(self):
-        # ask user where to save
-        path = filedialog.asksaveasfilename(defaultextension='.m3u', filetypes=[('M3U files','*.m3u')], initialfile=f"{self.playlist.name}.m3u")
+        path = filedialog.asksaveasfilename(defaultextension='.m3u',
+                                            filetypes=[('M3U files', '*.m3u')],
+                                            initialfile=f"{self.playlist.name}.m3u")
         if not path:
             return
         try:
             self.playlist.export_m3u(path)
-            messagebox.showinfo('Export', f'Playlist exported to: {os.path.abspath(path)}')
+            messagebox.showinfo(
+                'Export', f'Playlist exported to: {os.path.abspath(path)}')
         except Exception as e:
             messagebox.showerror('Error', f'Could not export playlist: {e}')
+
 
 if __name__ == '__main__':
     root = tk.Tk()

@@ -7,7 +7,8 @@ Keep all core logic here so it can be tested with pytest (separation of concerns
 
 import re
 from typing import List
-from src.song import Song
+from song import Song
+
 
 class Playlist:
     def __init__(self, name: str):
