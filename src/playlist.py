@@ -6,7 +6,7 @@ and exporting playlists in M3U format.
 
 import re
 from typing import List
-from song import Song
+from .song import Song
 
 
 class Playlist:

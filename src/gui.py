@@ -11,8 +11,8 @@ This file intentionally keeps the UI basic so the MVP is easy to test.
 
 import tkinter as tk
 from tkinter import messagebox, filedialog
-from song import Song, demo_songs, afrobeats_songs
-from playlist import Playlist
+from .song import Song, demo_songs, afrobeats_songs
+from .playlist import Playlist
 import os
 
 
