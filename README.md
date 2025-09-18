@@ -63,4 +63,4 @@ Presenters: Khalid Tijani
  
 
 Screenshot of the GUI included in the repo.  
-Demo video available (see submission).  
+Demo video available .  
