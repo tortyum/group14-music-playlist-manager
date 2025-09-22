@@ -64,3 +64,5 @@ Presenters: Khalid Tijani, Felix Josiah Favour
 
 Screenshot of the GUI included in the repo.  
 Demo video available .  
+
+Created by group14-music-playlist-manager
