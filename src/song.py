@@ -30,13 +30,6 @@ class Song:
         }
 
 
-# Default Demo Songs (simple)
-demo_songs = [
-    Song("Song1", "Artist1", 200),
-    Song("Song2", "Artist2", 180),
-    Song("Song3", "Artist3", 240),
-]
-
 # afrobeats Songs
 afrobeats_songs = [
     Song("Calm Down", "Rema", 238),
