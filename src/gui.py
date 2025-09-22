@@ -6,12 +6,12 @@ Simple Tkinter GUI that demonstrates the MVP requirements:
 - reorder songs (up/down)
 - export playlist to M3U
 
-This file intentionally keeps the UI basic so the MVP is easy to test.
+
 """
 
 import tkinter as tk
 from tkinter import messagebox, filedialog
-from .song import Song, demo_songs, afrobeats_songs
+from .song import Song, afrobeats_songs
 from .playlist import Playlist
 import os
 
@@ -30,7 +30,7 @@ class PlaylistGUI:
             Song("Blinding Lights", "The Weeknd", 200),
             Song("Levitating", "Dua Lipa", 203),
             Song("Smells Like Teen Spirit", "Nirvana", 301),
-        ] + demo_songs + afrobeats_songs   # merged all
+        ] + afrobeats_songs   # merged all
 
         # Build UI frames
         self.left_frame = tk.Frame(root, padx=10, pady=10)
