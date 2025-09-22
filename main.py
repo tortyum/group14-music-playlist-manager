@@ -1,3 +1,4 @@
+
 # main.py
 """
 Entry point for the Music Playlist Manager.
@@ -16,3 +17,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

@@ -36,7 +36,7 @@ Setup & Running the App
 2. Ensure Python is installed.  
 
 3. To run the GUI on cmd:  
-   `python -m src.gui`
+   `python -m src.main.py`
 
 4. To run the tests:  
    `python -m unittest discover -s tests -p "test_*.py"`
@@ -53,12 +53,12 @@ Credits
 Lead: Aondoakaa Alexander Tor-Tyum / “tortyum”  
 Other contributors:  
 Developers: Muhammad Abdurrahman, Abdallah Farouk Usman
-Testers: Gift Enefiok Asanga, 
-Continous Integrator: Usman Nuhu Aliyu
-Presenters: Khalid Tijani
+Testers: Gift Enefiok Asanga, Hwnry
+Continous Integrator: Usman Nuhu Aliyu, Ochege Henry 
+Presenters: Khalid Tijani, Felix Josiah Favour 
 
 
-
+# 1st demo Video: https://drive.google.com/file/d/1Mv0K_9oq4ba25fnwOrPdPlP7XOwCbnAm/view?usp=drive_link
 
  
 
