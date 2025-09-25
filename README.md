@@ -53,7 +53,7 @@ Credits
 Lead: Aondoakaa Alexander Tor-Tyum / “tortyum”  
 Other contributors:  
 Developers: Muhammad Abdurrahman, Abdallah Farouk Usman
-Testers: Gift Enefiok Asanga, Hwnry
+Testers: Gift Enefiok Asanga, Hwnry, Yaasir Abolore A
 Continous Integrator: Usman Nuhu Aliyu, Ochege Henry 
 Presenters: Khalid Tijani, Felix Josiah Favour 
 
